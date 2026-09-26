@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f5ef">
+  <meta name="description" content="Vijay Mathely's notebook on technology, everyday life, and the ideas that stay with us.">
+  <title>Vijay's Sound Bytes — Notes by Vijay Mathely</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f4f5ef;
+      --ink: #20251f;
+      --muted: #656d63;
+      --line: #d9ddd3;
+      --green: #426452;
+      --lime: #d8e777;
+      --coral: #e7785d;
+      --white: #fffefa;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+      --mono: "DM Mono", monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 4px;
+    }
+    .shell { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+    .topbar { border-bottom: 1px solid var(--line); }
+    .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: var(--lime);
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      font-family: var(--serif);
+      font-size: 15px;
+    }
+    nav { display: flex; align-items: center; gap: 30px; }
+    nav a { color: var(--muted); font-size: 13px; text-decoration: none; }
+    nav a:hover { color: var(--ink); }
+    .nav-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .nav-note::before {
+      width: 7px;
+      height: 7px;
+      content: "";
+      background: var(--coral);
+      border-radius: 50%;
+    }
+    .intro { padding: 72px 0 48px; animation: enter .55s ease-out both; }
+    .eyebrow, .section-kicker, .post-meta, .feature-meta, .footer-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .09em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+    .eyebrow { display: flex; align-items: center; gap: 10px; }
+    .eyebrow span { color: var(--coral); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 850px;
+      margin: 18px 0 20px;
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 86px);
+      font-weight: 500;
+      line-height: .98;
+    }
+    h1 em { color: var(--green); font-weight: 500; }
+    .intro-bottom {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .intro-copy { max-width: 520px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .text-link span { color: var(--coral); font-size: 18px; }
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 370px;
+      margin-bottom: 104px;
+      background: var(--green);
+      color: var(--white);
+      overflow: hidden;
+      animation: enter .65s .08s ease-out both;
+    }
+    .feature-copy { display: flex; flex-direction: column; align-items: start; justify-content: center; padding: 48px clamp(28px, 5vw, 64px); }
+    .feature-meta { color: #d5dfd2; }
+    .feature-meta span { padding-inline: 8px; color: var(--lime); }
+    .feature h2 { max-width: 430px; margin: 24px 0 16px; font-family: var(--serif); font-size: clamp(32px, 4.3vw, 48px); font-weight: 500; line-height: 1.08; }
+    .feature p { max-width: 400px; margin-bottom: 26px; color: #e0e7df; font-size: 14px; line-height: 1.7; }
+    .feature .text-link { border-color: #e0e7df; }
+    .feature .text-link span { color: var(--lime); }
+    .feature-image { min-height: 370px; overflow: hidden; }
+    .feature-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .notes { padding-bottom: 100px; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--ink);
+    }
+    .section-head h2 { margin: 6px 0 0; font-family: var(--serif); font-size: 42px; font-weight: 500; }
+    .section-kicker { color: var(--coral); }
+    .filters { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
+    .filter-button {
+      padding: 8px 13px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .filter-button:hover, .filter-button[aria-pressed="true"] { border-color: var(--line); background: var(--white); color: var(--ink); }
+    .filter-button[aria-pressed="true"]::before { width: 6px; height: 6px; display: inline-block; margin-right: 7px; background: var(--coral); border-radius: 50%; content: ""; vertical-align: 1px; }
+    .search-row { display: flex; justify-content: end; padding: 20px 0 0; }
+    .search-wrap { width: min(270px, 100%); position: relative; }
+    .search-wrap::before { position: absolute; top: 10px; left: 12px; color: var(--muted); content: "⌕"; font-size: 20px; line-height: 1; }
+    .search {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 12px 9px 36px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 12px;
+    }
+    .post-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 18px; }
+    .post {
+      min-width: 0;
+      background: var(--white);
+      border: 1px solid var(--line);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .post:hover { transform: translateY(-3px); border-color: #a7b09f; }
+    .post[hidden] { display: none; }
+    .post img { width: 100%; aspect-ratio: 1.55; display: block; object-fit: cover; }
+    .post-content { padding: 21px 21px 19px; }
+    .post-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 9px; }
+    .post-category { color: var(--green); }
+    .post h3 { margin: 15px 0 9px; font-family: var(--serif); font-size: 25px; font-weight: 500; line-height: 1.13; }
+    .post p { min-height: 66px; margin-bottom: 16px; color: var(--muted); font-size: 12px; line-height: 1.65; }
+    .post details { border-top: 1px solid var(--line); }
+    .post summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; cursor: pointer; font-size: 11px; font-weight: 700; list-style: none; }
+    .post summary::-webkit-details-marker { display: none; }
+    .post summary::after { color: var(--coral); content: "+"; font-size: 18px; font-weight: 400; }
+    .post details[open] summary::after { content: "−"; }
+    .post .post-body { min-height: 0; margin: 13px 0 0; padding-bottom: 2px; color: var(--ink); }
+    .empty-state { grid-column: 1 / -1; padding: 42px 0; color: var(--muted); text-align: center; }
+    .about {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 50px;
+      align-items: start;
+      padding: 58px 0 64px;
+      border-top: 1px solid var(--line);
+    }
+    .about h2 { margin: 0; font-family: var(--serif); font-size: 38px; font-weight: 500; }
+    .about-copy { max-width: 590px; }
+    .about-copy p { margin: 0 0 13px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .about-copy p strong { color: var(--ink); font-weight: 600; }
+    footer { background: var(--ink); color: var(--white); }
+    .footer-inner { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-label { color: #c5cec2; }
+    .footer-inner a { color: var(--lime); font-size: 12px; text-decoration: none; }
+    @keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 36px, 560px); }
+      .topbar-inner { min-height: 66px; }
+      nav { gap: 16px; }
+      nav a { font-size: 12px; }
+      .nav-note { display: none; }
+      .intro { padding: 52px 0 34px; }
+      h1 { font-size: 56px; }
+      .intro-bottom { align-items: start; flex-direction: column; gap: 20px; }
+      .intro-copy { font-size: 15px; }
+      .feature { grid-template-columns: 1fr; margin-bottom: 70px; }
+      .feature-copy { padding: 34px 27px 36px; }
+      .feature h2 { margin-top: 18px; font-size: 38px; }
+      .feature-image { min-height: 0; aspect-ratio: 1.4; grid-row: 1; }
+      .section-head { align-items: start; flex-direction: column; }
+      .section-head h2 { font-size: 36px; }
+      .post-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .post-content { padding: 16px; }
+      .post h3 { font-size: 21px; }
+      .post p { min-height: 84px; }
+      .about { grid-template-columns: 1fr; gap: 20px; padding-block: 42px; }
+    }
+    @media (max-width: 480px) {
+      .shell { width: calc(100% - 32px); }
+      .brand { gap: 8px; font-size: 13px; }
+      .brand-mark { width: 30px; height: 30px; }
+      nav { gap: 13px; }
+      nav a { font-size: 11px; }
+      .intro { padding-top: 43px; }
+      h1 { font-size: 48px; }
+      .feature { margin-bottom: 60px; }
+      .post-list { grid-template-columns: 1fr; gap: 14px; }
+      .post img { aspect-ratio: 1.8; }
+      .post p { min-height: 0; }
+      .search-row { justify-content: stretch; }
+      .search-wrap { width: 100%; }
+      .footer-inner { align-items: start; flex-direction: column; justify-content: center; padding-block: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="Vijay's Sound Bytes, home">
+        <span class="brand-mark" aria-hidden="true">V</span>
+        <span>Vijay's sound bytes</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#notes">The notes</a>
+        <a href="#about">About</a>
+        <span class="nav-note">A personal notebook</span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="eyebrow"><span>///</span> A notebook by Vijay Mathely</div>
+      <h1 id="page-title">Vijay's sound <em>bytes.</em></h1>
+      <div class="intro-bottom">
+        <p class="intro-copy">A place for the ideas that linger: technology, ordinary days, and all the interesting bits in between.</p>
+        <a class="text-link" href="#notes">Find a note <span aria-hidden="true">↘</span></a>
+      </div>
+    </section>
+
+    <section class="feature" aria-labelledby="feature-title">
+      <div class="feature-copy">
+        <div class="feature-meta">From the notebook <span>•</span> 4 minute read</div>
+        <h2 id="feature-title">A little more curious, a little less certain</h2>
+        <p>On making room for better questions, and why the most useful answer is sometimes another thing to wonder about.</p>
+        <a class="text-link" href="#notes">Explore the notes <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="feature-image">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="A quiet lake and mountains reflected in the water" fetchpriority="high">
+      </div>
+    </section>
+
+    <section class="notes" id="notes" aria-labelledby="notes-title">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">The latest</div>
+          <h2 id="notes-title">Notes from here</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filter notes by category">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">Everything</button>
+          <button class="filter-button" type="button" data-filter="technology" aria-pressed="false">Technology</button>
+          <button class="filter-button" type="button" data-filter="life" aria-pressed="false">Everyday life</button>
+          <button class="filter-button" type="button" data-filter="ideas" aria-pressed="false">Ideas</button>
+        </div>
+      </div>
+      <div class="search-row">
+        <label class="search-wrap">
+          <span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Search notes</span>
+          <input class="search" id="search" type="search" placeholder="Search the notebook" autocomplete="off">
+        </label>
+      </div>
+      <div class="post-list" id="post-list" aria-live="polite">
+        <article class="post" data-category="technology" data-search="ai work useful tools technology attention">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&amp;fit=crop&amp;w=720&amp;q=80" alt="A tidy desk with a laptop and notebook" loading="lazy">
+          <div class="post-content">
+            <div class="post-meta"><span class="post-category">Technology</span><time datetime="2026-09-18">Sep 18, 2026</time></div>
+            <h3>Making technology earn its place</h3>
+            <p>Useful tools should give a little attention back, not just ask for more of it.</p>
+            <details><summary>Open this note</summary><p class="post-body">The best tool in the room is not always the newest one. I keep coming back to a simple test: does this make space for more thought, or does it just give me another place to put it? It's a small question, but a helpful one when everything is promising to change how we work.</p></details>
+          </div>
+        </article>
+        <article class="post" data-category="life" data-search="walking everyday life attention small things routine">
+          <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&amp;fit=crop&amp;w=720&amp;q=80" alt="Soft morning light falling across an open landscape" loading="lazy">
+          <div class="post-content">
+            <div class="post-meta"><span class="post-category">Everyday life</span><time datetime="2026-09-07">Sep 7, 2026</time></div>
+            <h3>The long way home</h3>
+            <p>A small case for leaving a few minutes unplanned at the end of the day.</p>
+            <details><summary>Open this note</summary><p class="post-body">A route can be efficient and still miss the point. Taking the longer way home has a way of returning the day to me: a new shop, a change in the sky, a thought that had no room to finish itself at the desk. Nothing dramatic happens. That might be why it works.</p></details>
+          </div>
+        </article>
+        <article class="post" data-category="ideas" data-search="learning ideas beginner curiosity start over">
+          <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&amp;fit=crop&amp;w=720&amp;q=80" alt="An open notebook ready for a new idea" loading="lazy">
+          <div class="post-content">
+            <div class="post-meta"><span class="post-category">Ideas</span><time datetime="2026-08-24">Aug 24, 2026</time></div>
+            <h3>Being new at something, on purpose</h3>
+            <p>What changes when the goal is to keep asking, instead of getting good quickly?</p>
+            <details><summary>Open this note</summary><p class="post-body">There is a particular freedom in being a beginner: you have permission to ask the obvious question, to make a clumsy first attempt, to be surprised. Expertise matters. So does remembering what it felt like before things made sense. I want to keep a little of that beginner's mind around.</p></details>
+          </div>
+        </article>
+      </div>
+      <p class="empty-state" id="empty-state" hidden>No notes match that search. Try another word or category.</p>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div>
+        <div class="section-kicker">A little context</div>
+        <h2 id="about-title">Hello, I'm Vijay.</h2>
+      </div>
+      <div class="about-copy">
+        <p><strong>Vijay Mathely</strong> is the person behind this notebook. This is a home for short essays, observations, and works-in-progress across technology and everyday life.</p>
+        <p>The notes here are a starting point. More of my own stories, links, and details will find their way in as this space grows.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span class="footer-label">Vijay's sound bytes <span aria-hidden="true">·</span> Est. 2026</span>
+      <a href="#top">Back to the beginning ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const filterButtons = [...document.querySelectorAll(".filter-button")];
+    const posts = [...document.querySelectorAll(".post")];
+    const searchInput = document.querySelector("#search");
+    const emptyState = document.querySelector("#empty-state");
+    let activeFilter = "all";
+
+    function updatePosts() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      for (const post of posts) {
+        const matchesCategory = activeFilter === "all" || post.dataset.category === activeFilter;
+        const matchesSearch = !query || `${post.dataset.search} ${post.textContent}`.toLowerCase().includes(query);
+        post.hidden = !(matchesCategory && matchesSearch);
+        if (!post.hidden) visibleCount += 1;
+      }
+
+      emptyState.hidden = visibleCount !== 0;
+    }
+
+    for (const button of filterButtons) {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        for (const option of filterButtons) {
+          option.setAttribute("aria-pressed", String(option === button));
+        }
+        updatePosts();
+      });
+    }
+
+    searchInput.addEventListener("input", updatePosts);
+  </script>
+</body>
+</html>
